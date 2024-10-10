@@ -33,6 +33,13 @@ export const ServiceHome = () => {
   return (
     <Layout>
       <LeftSection>
+        <ImageSection
+          imageSrc={currentData?.imageSrc}
+          awaitTime={currentData?.awaitTime}
+          title={currentData?.fileName}
+        />
+      </LeftSection>
+      <RightSection>
         <UploadLabel htmlFor="upload">업로드</UploadLabel>
         <input
           style={{ display: "none" }}
@@ -42,7 +49,6 @@ export const ServiceHome = () => {
             console.log(e.target.files);
           }}
         />
-
         <FilelistContainer>
           <thead>
             <tr>
@@ -53,11 +59,7 @@ export const ServiceHome = () => {
           </thead>
           <tbody>
             {cFileList.map((f) => (
-              <FileRow
-                selected={currentData?.fileId === f.fileId}
-                key={f.fileId}
-                onClick={() => loadData(f.fileId)}
-              >
+              <FileRow selected={currentData?.fileId === f.fileId} key={f.fileId} onClick={() => loadData(f.fileId)}>
                 <td>{f.fileName}</td>
                 <td>{f.createdAt ?? ""}</td>
                 <td>
@@ -69,13 +71,6 @@ export const ServiceHome = () => {
             ))}
           </tbody>
         </FilelistContainer>
-      </LeftSection>
-      <RightSection>
-        <ImageSection
-          imageSrc={currentData?.imageSrc}
-          awaitTime={currentData?.awaitTime}
-          title={currentData?.fileName}
-        />
       </RightSection>
     </Layout>
   );
@@ -100,7 +95,7 @@ const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 40%;
+  width: 60%;
 `;
 
 const UploadLabel = styled.label`
@@ -130,7 +125,7 @@ const UploadLabel = styled.label`
 
 const RightSection = styled.div`
   height: 100%;
-  width: 60%;
+  width: 40%;
 `;
 
 const FilelistContainer = styled.table``;

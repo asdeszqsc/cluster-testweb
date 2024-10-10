@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import styled from "styled-components";
+import clusterImg from "@/assets/cluster.png";
 
 interface ImageSectionProps {
   awaitTime?: number;
@@ -10,46 +11,49 @@ interface ImageSectionProps {
 
 export const ImageSection = ({ ...props }: ImageSectionProps) => {
   const [onLoading, setOnLoading] = useState(false);
+  const [curImg, setCurImg] = useState<string | undefined>("");
 
   useEffect(() => {
     setOnLoading(true);
 
     setTimeout(() => {
       setOnLoading(false);
+      setCurImg(props.imageSrc);
     }, props.awaitTime);
   }, [props.awaitTime]);
 
-  return props.title ? (
+  return (
     <SectionLayout>
-      {onLoading ? (
-        <RotatingLines />
-      ) : (
-        <div>
-          <Title>{props.title}</Title>
-          <img src={props.imageSrc} />
-        </div>
+      <div>
+        <Title>{props.title ?? ""}</Title>
+        <img src={curImg ?? clusterImg} />
+      </div>
+      {onLoading && (
+        <Loading>
+          <RotatingLines />
+        </Loading>
       )}
     </SectionLayout>
-  ) : (
-    <NoneDataSection>Select file</NoneDataSection>
   );
 };
 
 const SectionLayout = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   height: 100%;
 `;
 
-const NoneDataSection = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100%;
+const Loading = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Title = styled.div`
   width: 100%;
+  min-height: 32px;
   background-color: var(--color-grey-700);
   color: white;
   text-align: center;
