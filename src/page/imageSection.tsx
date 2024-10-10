@@ -24,6 +24,7 @@ export const ImageSection = ({ ...props }: ImageSectionProps) => {
 
   return (
     <SectionLayout>
+      <p>NIR 데이터를 이용한 5개의 군집 분류 결과</p>
       <Title>{props.title ?? ""}</Title>
       <img src={curImg ?? clusterImg} />
       {onLoading && (
@@ -41,7 +42,15 @@ const SectionLayout = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  background-color: var(--color-grey-400);
   width: 90%;
+
+  p{
+    line-height: 2rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
 `;
 
 const Loading = styled.div`
