@@ -5,7 +5,7 @@ import { ImageSection } from "./imageSection";
 import DownloadIcon from "@/assets/download-svgrepo-com.svg";
 
 export const ServiceHome = () => {
-  const [cFileList, setcFileList] = useState<fileType[]>(fileList);
+  const [cFileList] = useState<fileType[]>(fileList);
   const [currentData, setCurrentData] = useState<fileType>();
 
   const loadData = async (fileId: string) => {
@@ -50,11 +50,9 @@ export const ServiceHome = () => {
                 <td>{f.fileName}</td>
                 <td>{f.createdAt ?? ""}</td>
                 <td>
-                  <CustomTd>
-                    <DownloadIcon />
-                    <a href={"files/" + f.fileName + ".txt"} download={f.fileName + ".txt"}>
-                      {" "}
-                      down{" "}
+                  <CustomTd htmlFor={f.fileId}>
+                    <a id={f.fileId} href={"files/" + f.fileName + ".txt"} download={f.fileName + ".txt"}>
+                      <DownloadIcon />
                     </a>
                   </CustomTd>
                 </td>
@@ -71,12 +69,6 @@ const CustomTd = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  :hover {
-    svg {
-      fill: #e3e3e3;
-    }
-  }
 `;
 
 const Layout = styled.div`
