@@ -24,10 +24,8 @@ export const ImageSection = ({ ...props }: ImageSectionProps) => {
 
   return (
     <SectionLayout>
-      <div>
-        <Title>{props.title ?? ""}</Title>
-        <img src={curImg ?? clusterImg} />
-      </div>
+      <Title>{props.title ?? ""}</Title>
+      <img src={curImg ?? clusterImg} />
       {onLoading && (
         <Loading>
           <RotatingLines />
@@ -40,8 +38,10 @@ export const ImageSection = ({ ...props }: ImageSectionProps) => {
 const SectionLayout = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 100%;
+  width: 90%;
 `;
 
 const Loading = styled.div`
