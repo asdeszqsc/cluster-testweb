@@ -49,7 +49,11 @@ export const ServiceHome = () => {
               <FileRow selected={currentData?.fileId === f.fileId} key={f.fileId} onClick={() => loadData(f.fileId)}>
                 <td>{f.fileName}</td>
                 <td>{f.createdAt ?? ""}</td>
-                <td>
+                <td
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
                   <CustomTd htmlFor={f.fileId}>
                     <a id={f.fileId} href={"files/" + f.fileName + ".txt"} download={f.fileName + ".txt"}>
                       <DownloadIcon />
